@@ -1,33 +1,110 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', cursive;
+  color: silver;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calender__board {
+  width: 714px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border: 1px solid silver;
 }
 
-.App-link {
-  color: #61dafb;
+.calender__days,
+.calender__dates {
+  display: flex;
+  flex-direction: row;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calender__dates{
+  flex-wrap: wrap;
+}
+
+.calender__day,
+.calender__date {
+  display: block;
+  height: 86px;
+  width: 100px;
+  border: 1px solid silver;
+  color: black;
+}
+
+
+
+.calender__day {
+  height: 50px;
+  line-height: 50px;
+}
+
+.calender__date {
+  padding-top: 10px;
+}
+
+.today,
+.selected {
+  border: 1px solid rgb(0,19,217);
+  box-shadow: inset 0 0 5px rgb(0,19,217,0.6)
+}
+
+.events {
+  box-shadow:none;
+  border: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__btn,
+.modal__btn {
+  width: 70px;
+  height: 50px;
+  border: 2px solid silver;
+  border-radius: 4px;
+  background-color: white;
+  font-weight: 600;
+  font-size: 17px;
+
+  font-family: 'Comfortaa', cursive;
+  color: silver;
+}
+
+.modal {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  width: 40%;
+  height: 300px;
+  background-color: white;
+  border: 2px solid silver;
+  border-radius: 4px;
+  box-shadow: 0 0 50px rgb(192,192,192,0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__btn {
+  margin: 10px;
+  min-width: 80px;
+}
+
+input[type='text'] {
+  margin: 5px 5px 15px;
+  padding: 5px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid silver;
+  border-radius: 4px;
 }
