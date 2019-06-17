@@ -6,12 +6,14 @@ import Dates from './Dates';
 class Calender extends React.Component {
 	constructor(props){
 		super(props);
-    this.dates=[];
+    this.dates={};
 		this.days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'];
     this.state={
       month: this.props.month,
       year: this.props.year,
       selectedDate: '',
+      selectedMonth: '',
+      selectedYear: '',
       modal: false
     }
 		this.date = new Date(this.state.year, this.state.month, 1);
@@ -30,26 +32,29 @@ class Calender extends React.Component {
   }
 
   handleSelectDate=(event)=>{
-    if(this.state.selectedDate!=event.target.firstChild.data){
-      this.inputs = [];
-    }
     if(event.target.classList.contains("calender__date")){
       [...event.target.parentNode.children].forEach((item)=>{
         item.classList.remove("selected");})
       event.target.className += " selected";
       this.setState({
-        modal: 'open',
         selectedDate: event.target.firstChild.data
     })
+    if(this.state.selectedDate!=event.target.firstChild.data){
+      this.inputs = [];
+    }
     } else if(event.target.parentNode.classList.contains("calender__date")){
       [...event.target.parentNode.parentNode.children].forEach((item)=>{
         item.classList.remove("selected");})
+        event.target.parentNode.className += " selected";
         this.setState({
-          modal: 'open',
           selectedDate: event.target.parentNode.firstChild.data
       })
     }
-
+    this.setState({
+      modal: 'open',
+      selectedYear: this.state.year,
+      selectedMonth: this.state.month
+    })
     
     console.log(this.state.selectedDate)
   }
@@ -68,7 +73,8 @@ class Calender extends React.Component {
       return {month: previousMonth}
     }) 
     this.date.setMonth(this.state.month-1);
-    this.dates = [];
+    this.dates = {};
+    this.inputs= []
   }
 
   handleNextM =()=>{
@@ -83,7 +89,8 @@ class Calender extends React.Component {
       let nextMonth = ++prevState.month;
       return {month: nextMonth}
     })
-    this.dates = [];
+    this.dates = {};
+    this.inputs = []
   }
 
   handleToday=()=>{
@@ -144,6 +151,8 @@ class Calender extends React.Component {
                      selectedDate={this.state.selectedDate}
                      event={this.inputs}
                      handleSelectDate={this.handleSelectDate}
+                     selectedYear= {this.state.year}
+                     selectedMonth= {this.state.month}
                />
             </div>
         	</div>
@@ -152,18 +161,3 @@ class Calender extends React.Component {
 }
 
 export default Calender;
-// {this.getDates()}
-const utils = {
-  debounce
-};
-
-
-function debounce(f, delay) {
-  let timer = null;
-  return function(...args) {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      f.call(this, ...args);
-    }, delay);
-  };
-}

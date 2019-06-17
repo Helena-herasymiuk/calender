@@ -28,7 +28,7 @@
 .calender__day,
 .calender__date {
   display: block;
-  height: 86px;
+  min-height: 86px;
   width: 100px;
   border: 1px solid silver;
   color: black;
