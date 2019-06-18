@@ -3,11 +3,12 @@ import React from 'react';
 function Modal(props) {
   return (
     <div className="modal">
-       <p>Please enter your event</p>
+       <p>Please enter your event for {props.date}.{+props.month+1}</p>
         <label>
         	Name of event
        	 <input type='text' placeholder='event'
        	 				onChange={props.inputVal}
+                onKeyDown={props.handleKey}
                 autoFocus>
          </input>
         </label>

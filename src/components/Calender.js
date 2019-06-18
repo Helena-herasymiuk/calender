@@ -100,6 +100,7 @@ class Calender extends React.Component {
     this.setState({
       modal: false
     })
+    this.input = "";
   }
 
   inputVal=(event)=>{
@@ -113,8 +114,16 @@ class Calender extends React.Component {
     if(this.input){
     this.inputs.push(this.input);}
     this.events[this.state.selectedDate+"."+this.state.month+"."+this.state.year] = this.inputs;
-    this.input = ""
+    this.input = "";
+  }
 
+  handleKey=(event)=>{
+    if(event.keyCode === 27){
+      this.modalClose()
+    }
+    if(event.keyCode === 13){
+      this.saveEvent()
+    }
   }
 
   render(){
@@ -132,9 +141,12 @@ class Calender extends React.Component {
       				{this.getDays()}
       			</div>
             {this.state.modal &&
-             <Modal modalClose={this.modalClose}
+             <Modal date={this.state.selectedDate}
+                    month={this.state.month}
+                    modalClose={this.modalClose}
                     saveEvent={this.saveEvent}
-                    inputVal={this.inputVal}/>}
+                    inputVal={this.inputVal}
+                    handleKey={this.handleKey}/>}
             <div className="calender__dates">
 
              <Dates  date={this.date}
