@@ -103,17 +103,18 @@ class Calender extends React.Component {
   }
 
   inputVal=(event)=>{
-    this.input = event.target.value;
-    
+     this.input = event.target.value;
   }
 
   saveEvent=()=>{
     this.setState({
       modal: false
     })
-    this.inputs.push(this.input);
+    if(this.input){
+    this.inputs.push(this.input);}
     this.events[this.state.selectedDate+"."+this.state.month+"."+this.state.year] = this.inputs;
-    console.log(this.events)
+    this.input = ""
+
   }
 
   render(){
