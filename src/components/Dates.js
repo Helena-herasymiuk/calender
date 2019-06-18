@@ -56,7 +56,10 @@ class Dates extends React.Component {
               onClick={this.props.handleSelectDate}>
           {event[0]}
           <div className="events">
-           {Array.isArray(event[1])?event[1].map((item, i) =><p key={item + i}>{item}</p>):""}
+           {Array.isArray(event[1])?event[1].map((item, i) =>{
+              return <p key={item + i}
+                        className='event'
+                      >{item}</p>}):""}
           </div>
         </div>
     )})}</>)
