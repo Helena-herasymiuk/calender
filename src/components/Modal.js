@@ -7,7 +7,9 @@ function Modal(props) {
         <label>
         	Name of event
        	 <input type='text' placeholder='event'
-       	 				onChange={props.inputVal}></input>
+       	 				onChange={props.inputVal}
+                autoFocus>
+         </input>
         </label>
 	    <div className='modal__btns'>
         <button className="modal__btn"

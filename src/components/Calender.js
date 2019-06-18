@@ -12,13 +12,12 @@ class Calender extends React.Component {
       month: this.props.month,
       year: this.props.year,
       selectedDate: '',
-      selectedMonth: '',
-      selectedYear: '',
       modal: false
-    }
+    };
 		this.date = new Date(this.state.year, this.state.month, 1);
     this.inputs=[];
     this.input="";
+    this.events={}
 	}
 
   getDays(){
@@ -40,7 +39,7 @@ class Calender extends React.Component {
         selectedDate: event.target.firstChild.data
     })
     if(this.state.selectedDate!=event.target.firstChild.data){
-      this.inputs = [];
+      this.inputs = this.events[event.target.firstChild.data+"."+this.state.month+"."+this.state.year] || [];
     }
     } else if(event.target.parentNode.classList.contains("calender__date")){
       [...event.target.parentNode.parentNode.children].forEach((item)=>{
@@ -51,12 +50,8 @@ class Calender extends React.Component {
       })
     }
     this.setState({
-      modal: 'open',
-      selectedYear: this.state.year,
-      selectedMonth: this.state.month
+      modal: 'open'
     })
-    
-    console.log(this.state.selectedDate)
   }
 
   handlePreviousM =()=>{
@@ -74,7 +69,6 @@ class Calender extends React.Component {
     }) 
     this.date.setMonth(this.state.month-1);
     this.dates = {};
-    this.inputs= []
   }
 
   handleNextM =()=>{
@@ -90,7 +84,6 @@ class Calender extends React.Component {
       return {month: nextMonth}
     })
     this.dates = {};
-    this.inputs = []
   }
 
   handleToday=()=>{
@@ -119,6 +112,8 @@ class Calender extends React.Component {
       modal: false
     })
     this.inputs.push(this.input);
+    this.events[this.state.selectedDate+"."+this.state.month+"."+this.state.year] = this.inputs;
+    console.log(this.events)
   }
 
   render(){
@@ -140,8 +135,8 @@ class Calender extends React.Component {
                     saveEvent={this.saveEvent}
                     inputVal={this.inputVal}/>}
             <div className="calender__dates">
-              
-              <Dates date={this.date}
+
+             <Dates  date={this.date}
                      todayD={this.props.date}
                      month={this.state.month}
                      dates={this.dates}
@@ -149,11 +144,11 @@ class Calender extends React.Component {
                      year={this.state.year}
                      todayYear={this.props.year}
                      selectedDate={this.state.selectedDate}
-                     event={this.inputs}
+                     events={this.events}
                      handleSelectDate={this.handleSelectDate}
-                     selectedYear= {this.state.year}
-                     selectedMonth= {this.state.month}
+                     select = {this.state.month+this.state.year}
                />
+      
             </div>
         	</div>
         </div>
