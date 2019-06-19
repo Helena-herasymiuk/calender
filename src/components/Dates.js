@@ -12,10 +12,10 @@ class Dates extends React.Component {
     const {date, dates,  month, year, selectedDate} = this.props;
     if (+date.getDay() === 0) {
       for (let i = 6; i > date.getDay(); i--) {
-        dates[1 + "." + i + "." + 1 ] = ["", ""];
+        dates[1 + "." + i + "." + 1 ] = [" ", ""];
       }} else {
       for (let i = 1; i < date.getDay(); i++) {
-        dates[1 + "." + i + "."+ 1 ] = ["", ""];
+        dates[1 + "." + i + "."+ 1 ] = [" ", ""];
       }
     }
     while(+date.getMonth() === +month) {
@@ -25,16 +25,16 @@ class Dates extends React.Component {
     }
     
     if (date.getDay() === 0) {
-      dates["40.00.0001"] = [" ", " "];
+      dates["40.00.0001"] = [" ", ""];
     } else if (date.getDay() !== 1) {
       for (let i = date.getDay(); i < 8; i++) {
-        dates["40.00.0"+ i + 1] = [" ", " "];
+        dates["40.00.0"+ i + 1] = [" ", ""];
       }}
     Object.entries(dates).map(([day, event]) => {
       if(+selectedDate === +event[0] &&
          this.state.events[selectedDate + "." + month + "." + year]){
         event[1] = this.state.events[event[0] + "." + month + "." + year]    
-      } 
+      }
     })
     return dates;
   }

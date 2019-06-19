@@ -39,9 +39,11 @@ class Calender extends React.Component {
         item.classList.remove("selected");
       })
       target.className += " selected";
-      this.setState({
-        selectedDate: target.firstChild.data
-      })
+      this.setState(() => {
+        if (target.firstChild.data !== " "){
+          return {selectedDate: target.firstChild.data,
+                  modal: "open"
+      }}})
       if(this.state.selectedDate !== target.firstChild.data){
         this.inputs = this.events[target.firstChild.data + "." + 
                                   this.state.month + "." + 
@@ -56,9 +58,6 @@ class Calender extends React.Component {
         selectedDate: parent.firstChild.data
       })
     }
-    this.setState({
-      modal: 'open'
-    })
   }
 
   handlePreviousM = () => {
@@ -142,38 +141,38 @@ class Calender extends React.Component {
 	  return (
       <div className="calender">
         <Header 
-          date={this.props.date}
-          month={this.state.month}
-          year={this.state.year}
-          onPreviousM={this.handlePreviousM}
-          onNextM={this.handleNextM}
-          onToday={this.handleToday}
+          date = {this.props.date}
+          month = {this.state.month}
+          year = {this.state.year}
+          onPreviousM = {this.handlePreviousM}
+          onNextM = {this.handleNextM}
+          onToday = {this.handleToday}
         />
       	<div className="calender__board">
     			<div className="calender__days">
     				{this.getDays()}
     			</div>
             {this.state.modal &&
-              <Modal date={this.state.selectedDate}
-                     month={this.state.month}
-                     modalClose={this.modalClose}
-                     saveEvent={this.saveEvent}
-                     inputVal={this.inputVal}
-                     handleKey={this.handleKey}
+              <Modal date = {this.state.selectedDate}
+                     month = {this.state.month}
+                     modalClose = {this.modalClose}
+                     saveEvent = {this.saveEvent}
+                     inputVal = {this.inputVal}
+                     handleKey = {this.handleKey}
               />
             }
             <div className="calender__dates">
-            <Dates date={this.date}
-                   todayD={this.props.date}
-                   month={this.state.month}
-                   dates={this.dates}
-                   todayMonth={this.props.month}
-                   year={this.state.year}
-                   todayYear={this.props.year}
-                   selectedDate={this.state.selectedDate}
-                   events={this.events}
-                   handleSelectDate={this.handleSelectDate}
-                   select = {this.state.month+this.state.year}
+            <Dates date = {this.date}
+                   todayD = {this.props.date}
+                   month = {this.state.month}
+                   dates = {this.dates}
+                   todayMonth = {this.props.month}
+                   year = {this.state.year}
+                   todayYear = {this.props.year}
+                   selectedDate = {this.state.selectedDate}
+                   events = {this.events}
+                   handleSelectDate = {this.handleSelectDate}
+                   select = {this.state.month + this.state.year}
             />
           </div>
       	</div>
