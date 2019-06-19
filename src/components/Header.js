@@ -17,7 +17,7 @@ function Header(props) {
     		{" > "}
     	</button>
     </div>
-  );
+  )
 }
 
 export default Header;
