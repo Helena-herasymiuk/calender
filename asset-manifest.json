@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/calender/static/css/main.8b7dded4.chunk.css",
-    "main.js": "/calender/static/js/main.a2404756.chunk.js",
-    "main.js.map": "/calender/static/js/main.a2404756.chunk.js.map",
+    "main.css": "/calender/static/css/main.2f0ba4ac.chunk.css",
+    "main.js": "/calender/static/js/main.982b9db4.chunk.js",
+    "main.js.map": "/calender/static/js/main.982b9db4.chunk.js.map",
     "runtime~main.js": "/calender/static/js/runtime~main.74e99931.js",
     "runtime~main.js.map": "/calender/static/js/runtime~main.74e99931.js.map",
     "static/js/2.6d7f933f.chunk.js": "/calender/static/js/2.6d7f933f.chunk.js",
     "static/js/2.6d7f933f.chunk.js.map": "/calender/static/js/2.6d7f933f.chunk.js.map",
     "index.html": "/calender/index.html",
-    "precache-manifest.cf886bc9e985e9c2ab55a3efd409e345.js": "/calender/precache-manifest.cf886bc9e985e9c2ab55a3efd409e345.js",
+    "precache-manifest.c0f58bd14145000db50a6e1579af2c4c.js": "/calender/precache-manifest.c0f58bd14145000db50a6e1579af2c4c.js",
     "service-worker.js": "/calender/service-worker.js",
-    "static/css/main.8b7dded4.chunk.css.map": "/calender/static/css/main.8b7dded4.chunk.css.map"
+    "static/css/main.2f0ba4ac.chunk.css.map": "/calender/static/css/main.2f0ba4ac.chunk.css.map"
   }
 }
