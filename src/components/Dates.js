@@ -1,70 +1,100 @@
 import React from 'react';
 
-class Dates extends React.Component { 
+class Dates extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: this.props.events
-    } 
+      date : new Date(this.props.year, this.props.month, 1),
+    };
   }
 
   getDates = () => {
-    const {date, dates,  month, year, selectedDate} = this.props;
-    if (+date.getDay() === 0) {
-      for (let i = 6; i > date.getDay(); i--) {
-        dates[1 + "." + i + "." + 1 ] = [" ", ""];
-      }} else {
-      for (let i = 1; i < date.getDay(); i++) {
-        dates[1 + "." + i + "."+ 1 ] = [" ", ""];
+    const {
+      dates, month, year, selectedDate, events,
+    } = this.props;
+    let startDate = this.state.date;
+    const startDay = +startDate.getDay();
+
+    switch (startDay) {
+      case 0:
+        for (let i = 6; i > 0; i--) {
+          dates[`0.${i}empty`] = [];
+        }
+        break;
+      default:
+        for (let i = 1; i < startDay; i++) {
+          dates[`0.${i}empty`] = [];
+        }
+        break;
+    }
+    console.log(+startDate.getMonth())
+    console.log(month)
+    while (+startDate.getMonth() === +month) {
+      const day = `${startDate.getDate()}.${+month + 1}.${year}`;
+      dates[day] = [events[day]];
+      startDate.setDate(+startDate.getDate() + 1);
+    }
+
+    if (startDate.getDay() === 0) {
+      dates.empty32 = [];
+    } else if (startDate.getDay() !== 1) {
+      for (let i = startDate.getDay(); i < 8; i++) {
+        dates[`empty3${i}`] = [];
       }
     }
-    while(+date.getMonth() === +month) {
-      let day = date.getDate() + "." + month + "." + year;
-      dates[day] = [date.getDate(), this.state.events[day]];
-      date.setDate(+date.getDate() + 1);
-    }
-    
-    if (date.getDay() === 0) {
-      dates["40.00.0001"] = [" ", ""];
-    } else if (date.getDay() !== 1) {
-      for (let i = date.getDay(); i < 8; i++) {
-        dates["40.00.0"+ i + 1] = [" ", ""];
-      }}
     Object.entries(dates).map(([day, event]) => {
-      if(+selectedDate === +event[0] &&
-         this.state.events[selectedDate + "." + month + "." + year]){
-        event[1] = this.state.events[event[0] + "." + month + "." + year]    
+      if (+selectedDate.id === +day && events[selectedDate.id]) {
+        event = events[day];
       }
-    })
+    });
     return dates;
   }
 
-  render(){
+  render() {
+    const {
+      todayD, todayMonth, todayYear, handleSelectDate, month, year,
+    } = this.props;
     return (
-      <>
-      {Object.entries(this.getDates())
-         .sort((a, b) => a[0] - b[0])
-         .map(([day, event], i) => {
-          return(
-        <div className={(+event[0] === +this.props.todayD && 
-                          +this.props.todayMonth === +this.props.month &&
-                          +this.props.todayYear === +this.props.year )?
-                          ("calender__date today")
-                          :("calender__date")}
-                key={day + String(this.props.date.getDay())}
-                onClick={this.props.handleSelectDate}>
-          {event[0]}
-          <div className="events">
-            {Array.isArray(event[1])?
-              event[1].map((item, i) =>{
-                return <p className="event" key={item + i}>
-                        {item}
-                       </p>})
-              :""}
-          </div>
-        </div>
-      )})}
-    </>)
+      <React.Fragment>
+        {Object.entries(this.getDates())
+          .sort((a, b) => parseInt(a) - parseInt(b))
+          .map(([day, event]) => (
+            <React.Fragment key={day}>
+              {parseInt(day)
+                ? (
+                  <div
+                    className={(+parseInt(day) === +todayD
+                      && +todayMonth === +month
+                      && +todayYear === +year)
+                      ? ('calender__date today')
+                      : ('calender__date')}
+                    onClick={handleSelectDate}
+                    onKeyDown={handleSelectDate}
+                    id={day}
+                  >
+                    {parseInt(day)}
+                    <div className="events">
+                      {(event[0])
+                        ? event.map(item => (
+                          <p className="event" key={item}>
+                            {item}
+                          </p>
+                        ))
+                        : ''}
+                    </div>
+                  </div>
+                )
+                : (
+                  <div
+                    className="calender__date empty"
+                    key={day}
+                  >
+                  </div>
+                )}
+            </React.Fragment>
+          ))}
+      </React.Fragment>
+    );
   }
 }
 
