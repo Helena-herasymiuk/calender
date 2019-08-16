@@ -3,15 +3,13 @@ import React from 'react';
 function Modal(props) {
   /* eslint-disable react/prop-types */
   const {
-    date, month, handleKey, inputVal, saveEvent, modalClose,
+    date, handleKey, inputVal, saveEvent, modalClose,
   } = props;
   return (
     <div className="modal">
       <p>
         Please enter your event for
-        {date}
-        .
-        {+month + 1}
+        {' ' + date}
       </p>
       <label htmlFor="eventAdding">
         Name of event
@@ -21,7 +19,6 @@ function Modal(props) {
           onChange={inputVal}
           onKeyDown={handleKey}
           id="eventAdding"
-          /* eslint-disable-next-line jsx-a11y/no-autofocus */
           autoFocus
         />
       </label>
