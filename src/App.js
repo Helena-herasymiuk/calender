@@ -1,14 +1,3 @@
-// import React from 'react';
-// import Calender from './components/Calender';
-//
-// function App() {
-//   return (
-//     <div className="App">
-//
-//     </div>
-//   );
-// }
-
 import React from 'react';
 import Header from './components/Header';
 import Modal from './components/Modal';
